@@ -170,19 +170,28 @@ class ProcessManager(object):
         if uid is not None:
             self.uid_map[uid] = False
 
+    def _get_engine(self, args):
+        """Return engine metadata. """
+        if 'engine' in args:
+            engine = args['engine']
+
+            if engine is not None:
+                if isinstance(engine, basestring):
+                    return {'name': engine}
+                elif 'name' in engine:
+                    return engine
+
+        return {'name': 'python'}
+
     def _run(self, uuid, args, okay, fail):
         """Take engine's configuration and start process for it. """
         self.processes[uuid] = None
 
-        try:
-            engine = args['engine']['name'].lower()
-        except KeyError:
-            engine = 'python'
-
+        engine = self._get_engine(args)
         namespace = {}
 
         try:
-            exec "from onlinelab.service.engine.%s import builder" % engine in namespace
+            exec "from onlinelab.service.engine.%s import builder" % engine['name'].lower() in namespace
         except ImportError:
             del self.processes[uuid]
             fail('bad-engine')
