@@ -16,12 +16,13 @@ from onlinelab.console.jsonrpc import JSONRPCService, JSONRPCError
 class Console(code.InteractiveConsole):
 
     def __init__(self, json, locals=None, filename="<console>",
-            debug=False):
+            debug=False, engine=None):
         code.InteractiveConsole.__init__(self, locals, filename)
         self.json = json
         self.debug = debug
         self.uuid = uuid.uuid4().hex
         self.killed = False
+        self.engine = engine
 
         readline.parse_and_bind('tab: complete')
         readline.parse_and_bind('set show-all-if-ambiguous on')
@@ -33,7 +34,7 @@ class Console(code.InteractiveConsole):
         sys.ps3 = ''     # output
 
         print "Initializing the engine..."
-        self.json.RPC.Engine.init(self.uuid)
+        self.json.RPC.Engine.init(self.uuid, engine)
 
     def completer(self, text, state):
         try:
@@ -139,6 +140,12 @@ FEMhub interactive remote console"""
             action="store",
             default="http://lab.femhub.org/",
             help="FEMhub server to use (default: %default)")
+    parser.add_option(
+            "--engine",
+            dest="engine",
+            action="store",
+            default=None,
+            help="Engine type to use (python|javascript, default: python)")
     options, args = parser.parse_args()
 
     url_base = options.server
@@ -146,9 +153,8 @@ FEMhub interactive remote console"""
         url_base += "/"
     print "Connecting to the online lab at %s ..." % url_base
     s = JSONRPCService(url_base + "async")
-    with Console(s, debug=options.debug) as client:
+    with Console(s, debug=options.debug, engine=options.engine) as client:
         client.interact(message)
-
 
 if __name__ == '__main__':
     main()
