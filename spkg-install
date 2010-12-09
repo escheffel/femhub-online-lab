@@ -9,6 +9,10 @@ fi
 
 PACKAGE_NAME=onlinelab
 CONFIG_DIR="$SPKG_LOCAL/share/onlinelab/"
+if [ -e "$CONFIG_DIR/service-home/onlinelab-service-9000.pid" ]; then
+    echo "Online lab is running. You need to stop it first before installing this package."
+    exit 1
+fi
 # remove old install:
 rm -rf $SPKG_LOCAL/lib/python/site-packages/onlinelab
 CONFIG_DIR_BACKUP=`mktemp -d --tmpdir=$SPKG_LOCAL/share/`
