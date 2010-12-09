@@ -216,7 +216,7 @@ FEMhub.InputCell = Ext.extend(FEMhub.IOCell, {
                 var result;
 
                 if (this.owner.mergeOnBackspace) {
-                    result = this.mergeCellBefore();
+                    result = this.mergeCellAbove();
                 } else {
                     result = false;
                 }
