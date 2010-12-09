@@ -4,26 +4,27 @@ FEMhub Online Lab SDK
 This repository contains a Software Development Kit (SDK) 
 for the FEMhub Online Laboratory (http://lab.femhub.org).
 Its purpose is to allow users to develop their own open 
-source applications and make them available to many users. 
-While the SDK runs locally on your computer, the FEMhub 
-Online Lab is powered with powerful cloud computers. 
+source applications and make them available to many users
+of the Online Lab. While the SDK runs locally on your 
+computer, the FEMhub Online Lab is powered with a powerful 
+cloud. 
  
 How to run it
 -------------
 
 (1) Install FEMhub using the instructions for developers
-    http://femhub.org/devel.html/
+    http://femhub.org/devel.html/.
 (2) Add the path to the FEMhub binary to your PATH.
-(3) In the directory of the femhub-online-lab/ type
-    <pre>
+(3) In the directory of the femhub-online-lab/ type::
+    
     femhub -s spkg-install
-    </pre>
+    
     This will install Online Lab SDK in your local FEMhub.
-(4) Change dir to your local FEMhub directory and do
-    <pre>
+(4) Change dir to your local FEMhub directory and do::
+    
     ./femhub
     lab(auth=False)
-    </pre>
+    
     Then open your browser (preferably Chrome or Firefox)
     at http://localhost:8000/. You should see a desktop-like
     setting with blue background and a few icons on the left.
@@ -34,10 +35,13 @@ How to run it
     you should see a color map of computed solution. The equation 
     that this module solves is 
 
--div(c1 grad u) + (c2, c3).(grad u) + c4 u = c5.
+.. math::
 
-    The parameters c1, c2, ..., c5 as well as the boundary 
-    conditions can be changed in the simple menu on the left.
+    -\mbox{div}(c_1 \nabla u) + (c_2, c_3)\cdot \nabla u + c_4 u = c_5.
+
+    The piecewise-constant parameters c_1, c_2, ..., c_5 as well 
+    as the boundary conditions can be changed in the simple menu 
+    on the left.
 
 How to write your own module
 ----------------------------
