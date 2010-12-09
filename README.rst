@@ -28,15 +28,13 @@ How to run it
     Then open your browser (preferably Chrome or Firefox)
     at http://localhost:8000/. You should see a desktop-like
     setting with blue background and a few icons on the left.
-(4) Double click on the "Module Basic" icon. You should see a simple
+(5) Double click on the "Module Basic" icon. You should see a simple
     mesh editor with a preloaded mesh. Click "submit" and the 
     tab should switch. Click "Run" and after approx. 4 seconds 
     (most of which are needed to initialize Mayavi plotting), 
     you should see a color map of computed solution. The equation 
     that this module solves is 
 
-.. math::
- 
     -\mbox{div}(c_1 \nabla u) + (c_2, c_3)\cdot \nabla u + c_4 u = c_5.
 
     The piecewise-constant parameters c_1, c_2, ..., c_5 as well 
