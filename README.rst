@@ -17,13 +17,13 @@ How to run it
 (2) Add the path to the FEMhub binary to your PATH.
 (3) In the directory of the femhub-online-lab/ type::
     
-    femhub -s spkg-install
+        ./femhub -s spkg-install
     
     This will install Online Lab SDK in your local FEMhub.
 (4) Change dir to your local FEMhub directory and do::
     
-    ./femhub
-    lab(auth=False)
+        ./femhub
+        lab(auth=False)
     
     Then open your browser (preferably Chrome or Firefox)
     at http://localhost:8000/. You should see a desktop-like
@@ -35,9 +35,9 @@ How to run it
     you should see a color map of computed solution. The equation 
     that this module solves is 
 
-.. math::
-
-    -\mbox{div}(c_1 \nabla u) + (c_2, c_3)\cdot \nabla u + c_4 u = c_5.
+    .. math::
+ 
+        -\mbox{div}(c_1 \nabla u) + (c_2, c_3)\cdot \nabla u + c_4 u = c_5.
 
     The piecewise-constant parameters c_1, c_2, ..., c_5 as well 
     as the boundary conditions can be changed in the simple menu 
