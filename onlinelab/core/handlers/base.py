@@ -47,7 +47,10 @@ class WebHandler(DjangoMixin, CORSMixin, APIRequestHandler):
             'time': time() - self.timestamp,
         }
 
-        data.update(self.params)
+        if isinstance(self.params, dict):
+            data.update(self.params)
+        else:
+            data.update({"params": self.params})
         data.update(args or {})
         data.update(kwargs)
 
