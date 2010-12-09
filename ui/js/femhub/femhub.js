@@ -6,12 +6,14 @@ FEMhub = {
     verbose: true,
 
     log: function(msg) {
-        if (console !== undefined) {
+        if (window.console) {
             console.log(msg);
 
+            /*
             if (_console !== undefined) {
                 _console.log(msg);
             }
+            */
         }
     },
 
