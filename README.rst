@@ -56,15 +56,15 @@ of Hermes2D using the instructions here:
 http://hpfem.org/hermes/doc/src/installation/linux.html.
 The C++ source files of the module Basic can be found 
 in .../hermes/hermes2d/modules/basic/. In order to create 
-a new module, do::
+a new module, in .../hermes/hermes2d/modules/ do::
 
     cp -r basic/ my_module/
 
-Add the new directory my_module to CMakeLists.txt, descend to
+Add the new directory my_module/ to CMakeLists.txt, descend to
 the directory my_module/, and change "basic.cpp" to "my_module.cpp"
 and "hermes_basic" to "hermes_my_module". Rename the files "basic.h"
 and "basic.cpp" to "my_module.h" and "my_module.cpp", respectively.
-The file file "my_module.cpp" needs to be included in "main.cpp", 
+The file "my_module.cpp" needs to be included in "main.cpp", 
 so you need to change the name there as well. Now do "cmake ."
 in the directory hermes2d/, change dir to modules/my_module/ and 
 type "make". Your new module should compile. Before adjusting it 
@@ -85,7 +85,7 @@ Make appropriate adjustments in the CMakeLists.txt file both in the
 burrent directory and in the subdirectory my_module/. Replace "basic"
 with "my_module" where appropriate. Go to hermes2d/ and type
 "cmake .", and then go to hermes2d/hermes2d/modules/my_module/
-and type "make". If the compilation succeed, you are ready to 
+and type "make". If the compilation succeeds, you are ready to 
 start developing your new module!
 
 How to write your own Javascript GUI
@@ -102,8 +102,16 @@ item (3) at the beginning of these instructions, install the
 updated Online Lab SDK in FEMhub, run FEMhub, and launch the 
 lab.
 
-Help us improve these instructions!
------------------------------------
+Submitting your new application
+-------------------------------
 
-These instructions are under development, any help improving 
-them is very welcome.
+If you would like your application added to the FEMhub 
+Online Lab at http://lab.femhub.org, send a message to 
+the FEMhub mailing list femhub@googlegroups.com, and 
+we'll take it from there!
+
+These instructions are in development
+-------------------------------------
+
+The workflow is under development and so are these instructions.
+We'll improve them in near future.
