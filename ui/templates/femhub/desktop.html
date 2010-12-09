@@ -14,9 +14,7 @@ FEMhub.Lab.run({
     },
     modules: [
         FEMhub.Modules.Browser,
-        {% if os.path.exists(path) %}
-        FEMhub.Modules.MeshEditor,
-        {% end %}
+        FEMhub.Modules.ModuleBasic,
         FEMhub.Modules.Settings,
         FEMhub.Modules.Help,
         FEMhub.Modules.Logout,
