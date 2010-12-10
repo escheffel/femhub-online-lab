@@ -14,10 +14,10 @@ How to run it
 
 (1) Install FEMhub using the instructions for developers
     http://femhub.org/devel.html/.
-(2) Add the path to the FEMhub binary to your PATH.
+(2) Add the path to the femhub directory to your PATH.
 (3) In the directory of the femhub-online-lab/ type::
     
-        ./femhub -s spkg-install
+        femhub -s spkg-install
     
     This will install the Online Lab SDK in your local FEMhub.
 (4) Change dir to your local FEMhub directory and do::
