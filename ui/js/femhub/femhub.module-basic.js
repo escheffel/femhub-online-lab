@@ -9,11 +9,7 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
                     this.boundary_conditions_window,
                     this.materials_window]);
 
-        this.statusbar = new FEMhub.Statusbar({
-            busyText: '',
-            defaultText: '',
-        });
-        //this.model_solution.getBottomToolbar() = this.statusbar;
+        this.statusbar = this.model_tab.getBottomToolbar();
         this.uuid = 0;
 
         this.run_button.on("click", this.run, this);
@@ -310,10 +306,10 @@ main()";
                     scope: this,
                     status: {
                         start: function() {
-                            //this._id = this.statusbar.showBusy({text: "Initializing the engine"});
+                            this._id = this.statusbar.showBusy({text: "Initializing the engine"});
                         },
                         end: function(ok, ret) {
-                            //this.statusbar.clearBusy(this._id);
+                            this.statusbar.clearBusy(this._id);
                         },
                     },
                 });
@@ -339,10 +335,10 @@ main()";
                 scope: this,
                 status: {
                     start: function() {
-                        //this._id = this.statusbar.showBusy({text: "Calculating"});
+                        this._id = this.statusbar.showBusy({text: "Calculating"});
                     },
                     end: function(ok, ret) {
-                        //this.statusbar.clearBusy(this._id);
+                        this.statusbar.clearBusy(this._id);
                     },
                     scope: this,
                 },

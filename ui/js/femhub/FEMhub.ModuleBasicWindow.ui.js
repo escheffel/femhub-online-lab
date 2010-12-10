@@ -88,6 +88,10 @@ FEMhub.ModuleBasicWindowUi = Ext.extend(Ext.Window, {
                                 }
                             ]
                         },
+                        bbar: new FEMhub.Statusbar({
+                            busyText: '',
+                            defaultText: '',
+                        }),
                         items: [
                             {
                                 xtype: 'panel',
