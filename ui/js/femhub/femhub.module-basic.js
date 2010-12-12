@@ -303,13 +303,13 @@ main()";
             if (this.uuid == 0) {
                 // we need to initialize a new engine
                 this.uuid = FEMhub.util.rfc.UUID();
-                FEMhub.log("UUID created:" + this.uuid);
+                FEMhub.log("UUID created" + this.uuid);
                 FEMhub.RPC.Engine.init({uuid: this.uuid}, {
                     okay: function(result) {
                         FEMhub.log("Engine initialized");
                         this.run2_evaluate(this.uuid,
                             this.sourcecode_generated);
-                        FEMhub.log("Evalaute called:");
+                        FEMhub.log("Evaluate called");
                         FEMhub.log(this.sourcecode_generated);
                     },
                     fail: function(reason, result) {
@@ -359,7 +359,7 @@ main()";
     },
 
     run3_result: function(result) {
-            FEMhub.log("Got result:");
+            FEMhub.log("Results received");
             FEMhub.log(result);
             if (result.traceback_html) {
                 //FEMhub.msg.error("Python traceback", result.traceback_html);
