@@ -5,7 +5,7 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
         this.my_init();
         this.mesh_editor = new FEMhub.MeshEditor();
         this.mesheditor_panel.add(this.mesh_editor);
-        this.model_parameters.add([this.mesh_parameters_window,
+        this.model_parameters.add([this.general_parameters_window,
                     this.boundary_conditions_window,
                     this.materials_window]);
 
@@ -25,8 +25,8 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
     },
     my_init: function () {
         // window to display mesh parameters
-        this.mesh_parameters_window = new Ext.Panel({
-            title: 'Mesh parameters',
+        this.general_parameters_window = new Ext.Panel({
+            title: 'General',
             margins:'3 10 3 3',
             cmargins:'3 3 3 3',
 
@@ -48,6 +48,13 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
                 xtype: 'textfield',
                 id: "Init_ref_num",
                 value: '0',
+	        }, {
+		xtype: 'box',
+                html: "Matrix solver:",
+		}, {
+                xtype: 'textfield',
+                id: "Matrix_solver",
+                value: 'umfpack',
 	        }, {
 		xtype: 'box',
                 height: '10',
@@ -116,7 +123,7 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
 
         // window to display equation parameters
         this.materials_window = new Ext.Panel({
-            title: 'Equation parameters',
+            title: 'Equation data',
             margins:'3 10 3 3',
             cmargins:'3 3 3 3',
 
@@ -192,12 +199,16 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
 
     run: function() {
 	// Input box for initial poly degree.
-        Init_p_val = this.mesh_parameters_window.get("Init_p").getValue();
+        Init_p_val = this.general_parameters_window.get("Init_p").getValue();
         FEMhub.log("Init_p_val: " + Init_p_val);
 
 	// Input box for initial refinements.
-        Init_ref_num_val = this.mesh_parameters_window.get("Init_ref_num").getValue();
+        Init_ref_num_val = this.general_parameters_window.get("Init_ref_num").getValue();
         FEMhub.log("Init_ref_num_val: " + Init_ref_num_val);
+
+	// Input box for matrix solver.
+        Matrix_solver_val = this.general_parameters_window.get("Matrix_solver").getValue();
+        FEMhub.log("Matrix solver: " + Matrix_solver_val);
 
 	// Input box for Dirichlet markers.
         BC_dir_marker_val = this.boundary_conditions_window.get("BC_dir_marker").getValue();
@@ -265,6 +276,7 @@ def main():\n\
     e.set_mesh_str(mesh)\n\
     e.set_initial_mesh_refinement(" + Init_ref_num_val + ")\n\
     e.set_initial_poly_degree(" + Init_p_val + ")\n\
+    e.set_matrix_solver(\"" + Matrix_solver_val + "\")\n\
     e.set_material_markers([" + Mat_marker_val + "])\n\
     e.set_c1_array([" + Mat_c1_val + "])\n\
     e.set_c2_array([" + Mat_c2_val + "])\n\
@@ -272,13 +284,14 @@ def main():\n\
     e.set_c4_array([" + Mat_c4_val + "])\n\
     e.set_c5_array([" + Mat_c5_val + "])\n\
     e.set_dirichlet_markers([" + BC_dir_marker_val + "])\n\
-    e.set_dirichlet_values([" + BC_dir_value_val + "])\n\
+    e.set_dirichlet_values([" + BC_dir_marker_val + "], [" + BC_dir_value_val + "])\n\
     e.set_neumann_markers([" + BC_neumann_marker_val + "])\n\
     e.set_neumann_values([" + BC_neumann_value_val + "])\n\
     e.set_newton_markers([" + BC_newton_marker_val + "])\n\
     e.set_newton_values([" + BC_newton_value_val + "])\n\
-    r, sln = e.calculate()\n\
-    assert r is True\n\
+    success = e.calculate()\n\
+    assert success is True\n\
+    sln = e.get_solution()\n\
     fig = plot_sln_mayavi(sln, offscreen=True)\n\
     return_mayavi_figure(fig)\n\
 \n\
