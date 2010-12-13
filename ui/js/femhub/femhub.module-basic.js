@@ -324,13 +324,13 @@ main()";
             FEMhub.log(result);
             if (result.traceback_html) {
                 //FEMhub.msg.error("Python traceback", result.traceback_html);
-                d = this.model_solution;
+                d = this.postproc_panel;
                 d.update("Python traceback:<br/><pre>" + result.traceback_html + "</pre>");
                 FEMhub.log(result.traceback_html);
             } else {
                 data = result.plots[0].data;
 		this.main_tabs.setActiveTab(3);
-                d = this.model_solution;
+                d = this.postproc_panel;
                 d.update('<table height="100%" width="100%" border="0"><tr><td valign="middle" align="center"><img src="data:image/png;base64,' + data + '"/></td></tr></table>');
             }
     },
