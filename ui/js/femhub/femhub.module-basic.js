@@ -4,15 +4,13 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
         FEMhub.ModuleBasic.superclass.initComponent.call(this);
         this.my_init();
         this.mesh_editor = new FEMhub.MeshEditor();
-        this.mesheditor_panel.add(this.mesh_editor);
-        this.model_parameters.add([this.general_parameters_window,
-                    this.boundary_conditions_window,
-                    this.materials_window]);
+        this.geometry_tab.add(this.mesh_editor);
+        this.model_parameters.add([this.boundary_conditions_window, this.materials_window]);
 
-        this.statusbar = this.model_tab.getBottomToolbar();
+        this.statusbar = this.computation_setup.getBottomToolbar();
         this.uuid = 0;
 
-        this.run_button.on("click", this.run, this);
+        this.computation_run.on("click", this.run, this);
         this.mesh_editor.on("mesh_submitted", function() {
             FEMhub.log("Mesh saved. Turning into the Model tab");
             this.main_tabs.setActiveTab(1);
@@ -24,44 +22,7 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
 
     },
     my_init: function () {
-        // window to display mesh parameters
-        this.general_parameters_window = new Ext.Panel({
-            title: 'General',
-            margins:'3 10 3 3',
-            cmargins:'3 3 3 3',
-
-            items: [{
-		xtype: 'box',
-                height: '10',
-                html: "",
-		}, {
-		xtype: 'box',
-                html: "Initial poly degree:",
-		}, {
-                xtype: 'textfield',
-                id: "Init_p",
-                value: '4',
-		}, {
-		xtype: 'box',
-                html: "Initial refinements:",
-		}, {
-                xtype: 'textfield',
-                id: "Init_ref_num",
-                value: '0',
-	        }, {
-		xtype: 'box',
-                html: "Matrix solver:",
-		}, {
-                xtype: 'textfield',
-                id: "Matrix_solver",
-                value: 'umfpack',
-	        }, {
-		xtype: 'box',
-                height: '10',
-                html: "",
-		}]
-	    });
-
+        
         // window to display boundary conditions
         this.boundary_conditions_window = new Ext.Panel({
             title: 'Boundary conditions',
@@ -199,15 +160,15 @@ FEMhub.ModuleBasic = Ext.extend(FEMhub.ModuleBasicWindowUi, {
 
     run: function() {
 	// Input box for initial poly degree.
-        Init_p_val = this.general_parameters_window.get("Init_p").getValue();
+        Init_p_val = this.computation_setup.get("Init_p").getValue();
         FEMhub.log("Init_p_val: " + Init_p_val);
 
 	// Input box for initial refinements.
-        Init_ref_num_val = this.general_parameters_window.get("Init_ref_num").getValue();
+        Init_ref_num_val = this.computation_setup.get("Init_ref_num").getValue();
         FEMhub.log("Init_ref_num_val: " + Init_ref_num_val);
 
 	// Input box for matrix solver.
-        Matrix_solver_val = this.general_parameters_window.get("Matrix_solver").getValue();
+        Matrix_solver_val = this.computation_setup.get("Matrix_solver").getValue();
         FEMhub.log("Matrix solver: " + Matrix_solver_val);
 
 	// Input box for Dirichlet markers.
@@ -368,12 +329,14 @@ main()";
                 FEMhub.log(result.traceback_html);
             } else {
                 data = result.plots[0].data;
+		this.main_tabs.setActiveTab(3);
                 d = this.model_solution;
                 d.update('<table height="100%" width="100%" border="0"><tr><td valign="middle" align="center"><img src="data:image/png;base64,' + data + '"/></td></tr></table>');
             }
     },
 
 });
+
 FEMhub.Modules.ModuleBasic = Ext.extend(FEMhub.Module, {
     launcher: {
         text: 'Module Basic',
