@@ -21,7 +21,7 @@ options = [
 ]
 
 defaults = {
-    'port': 8000,
+    'port': 9100,
     'debug': False,
     'daemon': True,
     'logs_path': '%(home)s/logs',

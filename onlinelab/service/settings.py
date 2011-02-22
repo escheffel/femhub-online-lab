@@ -23,7 +23,7 @@ options = [
 ]
 
 defaults = {
-    'port': 9000,
+    'port': 9101,
     'debug': False,
     'daemon': True,
     'logs_path': '%(home)s/logs',
@@ -33,7 +33,7 @@ defaults = {
     'log_level': 'info',
     'log_max_size': 10*1000*1000,      # store 10 MB in a log file
     'log_num_backups': 10,             # keep 10 log files at most
-    'core_url': 'http://localhost:8000',
+    'core_url': 'http://localhost:9100',
     'service_url': 'http://localhost:%(port)s',
     'provider': 'Unknown service provider',
     'description': '',

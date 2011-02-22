@@ -98,7 +98,7 @@ FEMhub.Login = Ext.extend(FEMhub.Window, {
         });
 
         Ext.apply(config, {
-            title: "Welcome to FEMhub Online Lab",
+            title: "Welcome to PyMacLab Online Lab",
             bodyCssClass: 'femhub-login-body',
             width: 563,
             autoHeight: true,
@@ -500,7 +500,8 @@ FEMhub.Modules.Logout = Ext.extend(FEMhub.Module, {
     start: function() {
         Ext.MessageBox.show({
             title: 'Logout',
-            msg: 'Do you really want to logout from FEMhub Online Lab?',
+            msg: 'Do you really want to logout from PyMacLab Online 
+Lab?',
             buttons: Ext.MessageBox.YESNO,
             icon: Ext.MessageBox.QUESTION,
             fn: function(button) {
